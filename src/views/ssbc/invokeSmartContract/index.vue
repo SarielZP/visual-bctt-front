@@ -1,43 +1,62 @@
 <template>
   <div class="app-container">
-
-    <el-row :gutter="0">
-      <el-col :span="22" :offset="1" :xs="24">
-        <el-form label-width="80px">
-          <el-form-item label="发起地址">
-            <el-select v-model="form.from" style="width: 100%" class="filter-item" filterable>
-              <el-option v-for="user in userList" :key="user.address" :label="user.address" :value="user.address" @click.native="chooseSender(user)" />
-            </el-select>
-          </el-form-item>
-
-          <el-form-item label="私钥">
-            <el-input v-model="form.private_key" :disabled="true" />
-          </el-form-item>
-          <el-form-item label="公钥">
-            <el-input v-model="form.public_key" :disabled="true" />
-          </el-form-item>
-          <el-form-item label="转账金额">
-            <el-input v-model.number="form.value" maxlength="10"/>
-          </el-form-item>
-          <el-form-item label="合约名称">
-            <el-select v-model="form.contract" style="width: 100%" filterable>
-              <el-option v-for="contract in contractList" :key="contract.data.contractname" :label="contract.data.contractname + ' ( ' + contract.address + ' )'" :value="contract.data.contractname" @click.native="chooseContract(contract)" />
-            </el-select>
-          </el-form-item>
+    <el-form label-width="80px">
+      <el-form-item></el-form-item>
+      <el-form-item></el-form-item>
+      <el-form-item></el-form-item>
+      <el-form-item label="发起地址" label-width="25%">
+        <el-col :span="14">
+          <el-select v-model="form.from" style="width: 100%" class="filter-item" filterable>
+            <el-option v-for="user in userList" :key="user.address" :label="user.address" :value="user.address" @click.native="chooseSender(user)" />
+          </el-select>
+        </el-col>
+      </el-form-item>
+      <el-form-item label="私钥" label-width="25%">
+        <el-col :span="14">
+          <el-input v-model="form.private_key" :disabled="true" />
+        </el-col>
+      </el-form-item>
+      <el-form-item label="公钥" label-width="25%">
+        <el-col :span="14">
+          <el-input v-model="form.public_key" :disabled="true" />
+        </el-col>
+      </el-form-item>
+      <el-form-item label="转账金额" label-width="25%">
+        <el-col :span="14">
+          <el-input v-model.number="form.value" maxlength="10"/>
+        </el-col>
+      </el-form-item>
+      <el-form-item label="合约名称" label-width="25%">
+        <el-col :span="14">
+          <el-select v-model="form.contract" style="width: 100%" filterable>
+            <el-option v-for="contract in contractList" :key="contract.data.contractname" :label="contract.data.contractname + ' ( ' + contract.address + ' )'" :value="contract.data.contractname" @click.native="chooseContract(contract)" />
+          </el-select>
+        </el-col>
+      </el-form-item>
+      <el-form-item>
+        <el-col :span="14">
           <codemirror v-if="codeVisible" v-model="code" :options="cmOption" />
-          <el-form-item v-if="codeVisible"/>
-          <el-form-item label="方法">
-            <el-select v-model="form.method" style="width: 100%" filterable>
-              <el-option v-for="method in methodList" :key="method" :label="method" :value="method" @click.native="chooseMethod(method)" />
-            </el-select>
-          </el-form-item>
-          <el-form-item label="参数">
-            <el-input v-model="form.args" />
-          </el-form-item>
-        </el-form>
-        <el-button type="primary" :disabled="disable" @click="invokeContract">调用合约</el-button>
-      </el-col>
-    </el-row>
+        </el-col>
+      </el-form-item>
+      <el-form-item v-if="codeVisible"/>
+      <el-form-item label="方法" label-width="25%">
+        <el-col :span="14">
+          <el-select v-model="form.method" style="width: 100%" filterable>
+            <el-option v-for="method in methodList" :key="method" :label="method" :value="method" @click.native="chooseMethod(method)" />
+          </el-select>
+        </el-col>
+      </el-form-item>
+      <el-form-item label="参数" label-width="25%">
+        <el-col :span="14">
+          <el-input v-model="form.args" />
+        </el-col>
+      </el-form-item>
+      <el-form-item>
+        <el-col :span="10" :offset="9">
+          <el-button type="primary" :disabled="disable" style="alignment: center; width:30% " @click="invokeContract">调用合约</el-button>
+        </el-col>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 

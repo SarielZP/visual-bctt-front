@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <el-row :gutter="1">
-      <el-col :span="22" :offset="1">
+      <el-col :span="14" :offset="1" :justify="center">
         <el-alert
           title="智能合约编辑与上传"
           type="info"
@@ -11,32 +11,39 @@
       </el-col>
     </el-row>
     <br>
-    <el-row :gutter="0">
-      <el-col :span="22" :offset="1" :xs="24">
-        <el-form label-width="80px">
-
-          <el-form-item label="发起地址">
-            <el-select v-model="form.account" style="width: 100%" class="filter-item">
-              <el-option v-for="user in userList" :key="user" :label="user.address" :value="user.address" @click.native="chooseSender(user)" />
-            </el-select>
-          </el-form-item>
-
-          <el-form-item label="私钥">
-            <el-input v-model="form.private_key" :disabled="true" />
-          </el-form-item>
-          <el-form-item label="公钥">
-            <el-input v-model="form.public_key" :disabled="true" />
-          </el-form-item>
-          <el-form-item label="合约名称">
-            <el-input v-model="form.name" />
-          </el-form-item>
-          <el-form-item label="编辑合约" />
-          <codemirror v-model="form.code" :options="cmOption" />
-          <el-form-item />
-          <el-button type="primary" :disabled="disable" @click="postContract">创建合约</el-button>
-        </el-form>
+    <el-form>
+      <el-form-item></el-form-item>
+      <el-form-item></el-form-item>
+      <el-form-item></el-form-item>
+      <el-form-item label="发起地址">
+        <el-col :span="12">
+          <el-select v-model="form.account" style="width: 100%" class="filter-item">
+            <el-option v-for="user in userList" :key="user" :label="user.address" :value="user.address" @click.native="chooseSender(user)" />
+          </el-select>
+        </el-col>
+      </el-form-item>
+      <el-form-item label="私钥">
+        <el-col :span="12">
+          <el-input v-model="form.private_key" :disabled="true" />
+        </el-col>
+      </el-form-item>
+      <el-form-item label="公钥">
+        <el-col :span="12">
+          <el-input v-model="form.public_key" :disabled="true" />
+        </el-col>
+      </el-form-item>
+      <el-form-item label="合约名称">
+        <el-col :span="12">
+          <el-input v-model="form.name" />
+        </el-col>
+      </el-form-item>
+      <el-form-item label="编辑合约" />
+      <el-col :span="12">
+        <codemirror v-model="form.code" :options="cmOption" />
       </el-col>
-    </el-row>
+      <el-form-item />
+      <el-button type="primary" :disabled="disable" style="alignment: center; width:30%" @click="postContract">创建合约</el-button>
+    </el-form>
   </div>
 </template>
 
